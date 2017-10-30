@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>HandleSendMessageController</servlet-name>
+        <servlet-class>controller.HandleSendMessageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HandleGetMessageController</servlet-name>
+        <servlet-class>controller.HandleGetMessageController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HandleSendMessageController</servlet-name>
+        <url-pattern>/HandleSendMessageController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HandleGetMessageController</servlet-name>
+        <url-pattern>/HandleGetMessageController</url-pattern>
+    </servlet-mapping>
+    
+    <filter>
+        <filter-name>UTF-8-Filter</filter-name>
+        <filter-class>filter.UTF8Filter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UTF-8-Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    
+    
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
