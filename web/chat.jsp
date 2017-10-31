@@ -21,8 +21,7 @@
         <table> 
             <tr>
                 <td>
-                    <table id="displayMessageTable"> 
-
+                    <table id="displayMessageArea"> 
                     </table>
                 </td>
             </tr>

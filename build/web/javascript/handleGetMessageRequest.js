@@ -1,9 +1,9 @@
-var displayMessageTable;
+var displayMessageArea;
 var getMessageServletUrl;
 var getMessageRequest;
 
 function initHandleGetMessageRequest() {
-    displayMessageTable = document.getElementById("displayMessageTable");
+    displayMessageArea = document.getElementById("displayMessageArea");
     getMessageServletUrl = "HandleGetMessageController";
     
     getMessage();
@@ -23,6 +23,7 @@ function getMessage() {
 }
 
 function handleGetMessageRespone(messageXML) {
+    clearDisplayMessageArea();
     if (messageXML == null) {
         return false;
     } else {
@@ -31,20 +32,24 @@ function handleGetMessageRespone(messageXML) {
         var innerdisplayMessageTable = "";
         for (i = 0; i < messages.length; i++) {
             var message = messages[i].getElementsByTagName("content")[0].textContent;
-            innerdisplayMessageTable += "<tr> <td> " + message + " </td> </tr>"
+            appendMessage(message);
         }
-        displayMessageTable.innerHTML = innerdisplayMessageTable;
     }
     setTimeout(getMessage, 1000);
+}
+
+function clearDisplayMessageArea() {
+    displayMessageArea.innerHTML = "";
 }
 
 function appendMessage(message) {
     var row;
     var cell;
-    displayMessageTable.style.display = 'table';
-    row = document.createElement("tr");
-    cell = document.createElement("td");
+    row = document.createElement("li");
+    row.setAttribute("class", "other");
+    cell = document.createElement("div");
+    cell.setAttribute("class", "msg");
+    cell.innerHTML = "<p>" + message + "</p>";
     row.appendChild(cell);
-    cell.appendChild(message);
-    displayMessageTable.appendChild(row);
+    displayMessageArea.appendChild(row);
 }
