@@ -35,4 +35,9 @@ public class RoomModel {
     public Rooms getRoomInfoByRoomID(int roomID) {
         return databaseDAO.getRoomInfoByRoomID(roomID);
     }
+    
+    public boolean inUserIdInRoomId(int userID, int RoomID) {
+        // @Todo: code here
+        return true;
+    }
 }

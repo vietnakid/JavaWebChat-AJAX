@@ -6,10 +6,10 @@ function initHandleGetMessageRequest() {
     displayMessageArea = document.getElementById("displayMessageArea");
     getMessageServletUrl = "HandleGetMessageController";
     
-    getMessage();
+    getMessages();
 }
 
-function getMessage() {
+function getMessages() {
     var parameters = "";
     getMessageRequest = initXMLHttpRequest();
     getMessageRequest.open("POST", getMessageServletUrl, true);
@@ -28,14 +28,12 @@ function handleGetMessageRespone(messageXML) {
         return false;
     } else {
         var messages = messageXML.getElementsByTagName("message");
-        
-        var innerdisplayMessageTable = "";
         for (i = 0; i < messages.length; i++) {
             var message = messages[i];
             appendMessage(message);
         }
     }
-    setTimeout(getMessage, 1000);
+    setTimeout(getMessages, 1000);
 }
 
 function clearDisplayMessageArea() {

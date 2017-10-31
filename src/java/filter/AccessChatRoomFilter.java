@@ -5,6 +5,7 @@
  */
 package filter;
 
+import entity.Rooms;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -12,6 +13,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import model.RoomModel;
 
 /**
  *
@@ -26,7 +28,13 @@ public class AccessChatRoomFilter implements Filter{
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        String plainRoomID = request.getParameter("roomID");
+        int roomID = Integer.parseInt(plainRoomID);
+        RoomModel roomModel = new RoomModel();
+        Rooms room = roomModel.getRoomInfoByRoomID(roomID);
+        request.setAttribute("room", room);
         
+        chain.doFilter(request, response);
     }
 
     @Override

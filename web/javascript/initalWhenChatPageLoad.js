@@ -1,6 +1,7 @@
 function initalPage() {
     initHandleSendMessageRequest();
     initHandleGetMessageRequest();
+    initHandleGetRoomRequest();
     
     document.cookie = "userid=1";
 }

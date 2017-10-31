@@ -8,6 +8,7 @@ package model;
 import dao.DatabaseDAO;
 import entity.Users;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -22,6 +23,10 @@ public class UserModel {
     
     public Users getUserInfo(int userID) {
         return databaseDAO.getUserInfo(userID);
+    }
+    
+    public List<Users> getAllUsers() {
+        return databaseDAO.getAllUsers();
     }
     
 }

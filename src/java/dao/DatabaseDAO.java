@@ -77,7 +77,7 @@ public class DatabaseDAO {
             String query = "SELECT * FROM RoomMembers Where userid = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, userID);
-            ResultSet rs = statement.executeQuery(query);
+            ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 int roomID = rs.getInt("room_id");
                 rooms.add(roomID);
@@ -93,10 +93,10 @@ public class DatabaseDAO {
         Rooms room = new Rooms();
         
         try {
-            String query = "SELECT * FROM rooms WHERE room_id = 1";
+            String query = "SELECT * FROM rooms WHERE room_id = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, roomID);
-            ResultSet rs = statement.executeQuery(query);
+            ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 room.setRoomID(roomID);
                 room.setRoomName(rs.getString("room_name"));
@@ -114,5 +114,11 @@ public class DatabaseDAO {
         //@ Todo: add code here
         
         return messages;
+    }
+    
+    public List<Users> getAllUsers() {
+        ArrayList<Users> users = new ArrayList<>();
+        
+        return users;
     }
 }

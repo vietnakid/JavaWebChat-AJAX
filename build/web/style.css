@@ -14,12 +14,33 @@ a{
   color: rgba(82,179,217,0.9);
 }
 
+.viewWrapper, html, body {
+    height: 100%;
+}
+
+.roomchat {
+    width: 30%;
+    float: left;
+    background: teal;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.chatview {
+    width: 70%;
+    float: left;
+    background: #e5e5e5;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
 /* M E N U */
 
 .menu {
     position: fixed;
     top: 0px;
-    left: 0px;
+    left: 30%;
     right: 0px;
     width: 100%;
     height: 50px;
@@ -272,7 +293,6 @@ emoji.funny{background-image: url(https://i.imgur.com/qKia58V.png);}
     height: 12px;
     max-height: 12px;
     background: #e5e5e5;
-    box-shadow: inset 0px 50px 0px rgba(82,179,217,0.9), inset 0px -52px 0px #fafafa;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -293,7 +313,7 @@ emoji.funny{background-image: url(https://i.imgur.com/qKia58V.png);}
   box-shadow: inset 0px 0px 3px #7f7f7f;
 }
 
-::-webkit-scrollbar-button {
+.chatview::-webkit-scrollbar-button {
     display: block;
     height: 26px;
 }
@@ -303,9 +323,9 @@ emoji.funny{background-image: url(https://i.imgur.com/qKia58V.png);}
 input.textarea {
     position: fixed;
     bottom: 0px;
-    left: 0px;
+    left: 30%;
     right: 0px;
-    width: 100%;
+    width: 70%;
     height: 50px;
     z-index: 99;
     background: #fafafa;
@@ -320,7 +340,7 @@ input.textarea {
     position: fixed;
     display: block;
     bottom: 8px;
-    left: 7px;
+    left: 30%;
     width: 34px;
     height: 34px;
     background-image: url(https://i.imgur.com/5WUpcPZ.png);
