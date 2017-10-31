@@ -47,7 +47,15 @@ public class DatabaseDAO {
     }
     
     public void addUserToRoom(int userID, int roomID) {
-        //@ Todo: add code here
+        try {
+            String query = "INSERT INTO RoomMembers (room_id, userid) VALUES (?, ?)";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, roomID);
+            statement.setInt(2, userID);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void deleteUserFromRoom(int userID, int roomID) {
@@ -75,7 +83,20 @@ public class DatabaseDAO {
     public Users getUserInfo(int userID) {
         Users user = new Users();
         
-        //@ Todo: add code here
+        try {
+            String query = "SELECT * FROM Users WHERE userid = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, userID);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                user.setUserID(rs.getInt("userid"));
+                user.setUserName(rs.getString("username"));
+                user.setDateOfBirth(rs.getDate("date_of_birth"));
+                user.setSex(rs.getString("sex"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         return user;
     }
@@ -145,6 +166,22 @@ public class DatabaseDAO {
     
     public ArrayList<Users> getAllUsers() {
         ArrayList<Users> users = new ArrayList<>();
+        
+        try {
+            String query = "SELECT * FROM Users";
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Users user = new Users();
+                user.setUserID(rs.getInt("userid"));
+                user.setUserName(rs.getString("username"));
+                user.setDateOfBirth(rs.getDate("date_of_birth"));
+                user.setSex(rs.getString("sex"));
+                users.add(user);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         return users;
     }
