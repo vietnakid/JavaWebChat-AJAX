@@ -185,4 +185,21 @@ public class DatabaseDAO {
         
         return users;
     }
+    
+    public boolean inUserIdInRoomId(int userID, int RoomID) {
+        try {
+            String query = "SELECT * FROM RoomMembers WHERE (room_id = ? AND userid = ?)";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, RoomID);
+            statement.setInt(2, userID);
+            
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 }

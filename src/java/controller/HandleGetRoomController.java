@@ -5,12 +5,16 @@
  */
 package controller;
 
+import entity.Rooms;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.RoomModel;
 
 /**
  *
@@ -44,11 +48,27 @@ public class HandleGetRoomController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Cookie[] cookies = request.getCookies();
+        int userID = 0;
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equalsIgnoreCase("userID")) {
+                userID = Integer.parseInt(cookie.getValue());
+            }
+        }
+        
+        RoomModel roomModel = new RoomModel();
+        ArrayList<Integer> roomIDs =  roomModel.getRoomIDsWithUserID(userID);
+        ArrayList<Rooms> rooms = new ArrayList<>();
+        for (Integer roomID : roomIDs) {
+            Rooms room = roomModel.getRoomInfoByRoomID(roomID);
+            rooms.add(room);
+        }
+        
         StringBuffer messageXML = new StringBuffer();
-        for (int i = 0; i < 10; i++) {
+        for (Rooms room : rooms) {
             messageXML.append("<room>");
-            messageXML.append("<name>" + String.valueOf(i) + "</name>");
-            messageXML.append("<id>" + String.valueOf(i) + "</id>");
+            messageXML.append("<name>" + room.getRoomName() + "</name>");
+            messageXML.append("<id>" + room.getRoomID() + "</id>");
             messageXML.append("</room>");
         }
         response.setContentType("text/xml");

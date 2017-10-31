@@ -38,7 +38,6 @@ public class RoomModel {
     }
     
     public boolean inUserIdInRoomId(int userID, int RoomID) {
-        // @Todo: code here
-        return true;
+        return databaseDAO.inUserIdInRoomId(userID, RoomID);
     }
 }

@@ -50,7 +50,6 @@ public class HandleGetMessageController extends HttpServlet {
             throws ServletException, IOException {
         
         String roomIDPlain = request.getParameter("roomID");
-        System.out.println(roomIDPlain);
         int roomID = Integer.parseInt(roomIDPlain);
         
         MessageModel messageModel = new MessageModel();

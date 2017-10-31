@@ -13,6 +13,8 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import model.RoomModel;
 
 /**
@@ -34,7 +36,19 @@ public class AccessChatRoomFilter implements Filter{
         Rooms room = roomModel.getRoomInfoByRoomID(roomID);
         request.setAttribute("room", room);
         
-        chain.doFilter(request, response);
+        Cookie[] cookies = ((HttpServletRequest)request).getCookies();
+        int userID = 0;
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equalsIgnoreCase("userID")) {
+                userID = Integer.parseInt(cookie.getValue());
+            }
+        }
+        if (roomModel.inUserIdInRoomId(userID, roomID)) {
+            chain.doFilter(request, response);
+        } else {
+            //@Todo: send to error page
+        }
+        
     }
 
     @Override
