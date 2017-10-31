@@ -8,6 +8,7 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -50,6 +51,8 @@ public class HandleGetMessageController extends HttpServlet {
         for (String message : messages) {
             messageXML.append("<message>");
             messageXML.append("<content>" + message + "</content>");
+            messageXML.append("<userid>" + (message.length()%2 + 1) + "</userid>");
+            messageXML.append("<timeUploaded>" + new Date() + "</timeUploaded>");
             messageXML.append("</message>");
         }
         response.setContentType("text/xml");

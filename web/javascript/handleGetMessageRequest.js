@@ -31,7 +31,7 @@ function handleGetMessageRespone(messageXML) {
         
         var innerdisplayMessageTable = "";
         for (i = 0; i < messages.length; i++) {
-            var message = messages[i].getElementsByTagName("content")[0].textContent;
+            var message = messages[i];
             appendMessage(message);
         }
     }
@@ -43,13 +43,28 @@ function clearDisplayMessageArea() {
 }
 
 function appendMessage(message) {
+    var content = message.getElementsByTagName("content")[0].textContent;
+    var userID = message.getElementsByTagName("userid")[0].textContent;
+    var timeUploaded = message.getElementsByTagName("timeUploaded")[0].textContent;
+    
     var row;
     var cell;
     row = document.createElement("li");
-    row.setAttribute("class", "other");
+    if (isOtherMessage(userID)) 
+        row.setAttribute("class", "other");
+    else
+        row.setAttribute("class", "self");
     cell = document.createElement("div");
     cell.setAttribute("class", "msg");
-    cell.innerHTML = "<p>" + message + "</p>";
+    cell.innerHTML = "<p>" + content + "</p>";
+    cell.innerHTML += "<time>" + timeUploaded + "</time>";
     row.appendChild(cell);
     displayMessageArea.appendChild(row);
+}
+
+function isOtherMessage(userID) {
+    if (userID == getSelfUserId()) {
+        return true;
+    }
+    return false;
 }
