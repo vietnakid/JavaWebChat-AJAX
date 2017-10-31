@@ -8,6 +8,7 @@ package dao;
 import context.DBContext;
 import entity.Messages;
 import entity.Rooms;
+import entity.Users;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,7 +35,7 @@ public class DatabaseDAO {
         }
     }
     
-    void createNewRoomWithName(String roomName) {
+    public void createNewRoomWithName(String roomName) {
         try {
             String query = "INSERT INTO Rooms (room_name) VALUES (?)";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -45,19 +46,31 @@ public class DatabaseDAO {
         }
     }
     
-    void addUserToRoom(int userID, int roomID) {
+    public void addUserToRoom(int userID, int roomID) {
         //@ Todo: add code here
     }
     
-    void deleteUserFromRoom(int userID, int roomID) {
+    public void deleteUserFromRoom(int userID, int roomID) {
         //@ Todo: add code here
     }
     
-    void createNewMessage(String userName, Date dateOfBirth, String password, String sex) {
+    public void createNewMessage(int userId, int RoomId, String content, Date dateUploaded) {
         //@ Todo: add code here
     }
     
-    List<Integer> getRoomIDsWithUserID(int userID) {
+    public void createNewUser(String userName, Date dateOfBirth, String password, String sex) {
+        //@ Todo: add code here
+    }
+    
+    public Users getUserInfo(int userID) {
+        Users user = new Users();
+        
+        //@ Todo: add code here
+        
+        return user;
+    }
+    
+    public List<Integer> getRoomIDsWithUserID(int userID) {
         ArrayList<Integer> rooms = new ArrayList<>();
         
         try {
@@ -76,7 +89,7 @@ public class DatabaseDAO {
         return rooms;
     }
     
-    Rooms getRoomInfoByRoomID(int roomID) {
+    public Rooms getRoomInfoByRoomID(int roomID) {
         Rooms room = new Rooms();
         
         try {
@@ -95,7 +108,7 @@ public class DatabaseDAO {
         return room;
     }
     
-    List<Messages> getAllMessageInRoom(int roomID) {
+    public List<Messages> getAllMessageInRoom(int roomID) {
         ArrayList<Messages> messages = new ArrayList<>();
         
         //@ Todo: add code here
