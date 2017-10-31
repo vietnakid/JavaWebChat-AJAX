@@ -55,7 +55,17 @@ public class DatabaseDAO {
     }
     
     public void createNewMessage(int userId, int RoomId, String content, Date dateUploaded) {
-        //@ Todo: add code here
+        try {
+            String query = "INSERT INTO Messages(userid, room_id, text_content, TimeStamps) VALUES (?, ?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, userId);
+            statement.setInt(2, RoomId);
+            statement.setString(3, content);
+            statement.setDate(4, new java.sql.Date(dateUploaded.getTime()));
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void createNewUser(String userName, Date dateOfBirth, String password, String sex) {
@@ -70,7 +80,7 @@ public class DatabaseDAO {
         return user;
     }
     
-    public List<Integer> getRoomIDsWithUserID(int userID) {
+    public ArrayList<Integer> getRoomIDsWithUserID(int userID) {
         ArrayList<Integer> rooms = new ArrayList<>();
         
         try {
@@ -108,15 +118,32 @@ public class DatabaseDAO {
         return room;
     }
     
-    public List<Messages> getAllMessageInRoom(int roomID) {
+    public ArrayList<Messages> getAllMessageInRoom(int roomID) {
         ArrayList<Messages> messages = new ArrayList<>();
         
-        //@ Todo: add code here
+        try {
+            String query = "SELECT * FROM Messages WHERE room_id = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, roomID);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Messages message = new Messages();
+                message.setMessageID(rs.getInt("Messages_id"));
+                message.setRoomID(rs.getInt("room_id"));
+                message.setUserID(rs.getInt("userid"));
+                message.setContent(rs.getString("text_content"));
+                message.setTimeUploaded(rs.getDate("TimeStamps"));
+                
+                messages.add(message);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         return messages;
     }
     
-    public List<Users> getAllUsers() {
+    public ArrayList<Users> getAllUsers() {
         ArrayList<Users> users = new ArrayList<>();
         
         return users;

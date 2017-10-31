@@ -12,12 +12,15 @@
         <title>${room.roomName}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script type="text/javascript" src="javascript/initalWhenChatPageLoad.js"> </script>
-        <script type="text/javascript" src="javascript/handleSendMessageRequest.js"> </script>
-        <script type="text/javascript" src="javascript/handleGetMessageRequest.js"> </script>
+        <script type="text/javascript" src="javascript/handleSendMessageRequest.js?n=1"> </script>
+        <script type="text/javascript" src="javascript/handleGetMessageRequest.js?n=1"> </script>
         <script type="text/javascript" src="javascript/handleGetRoomRequest.js"> </script>
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body onload="initalPage()">
+        
+        <script>var roomID = ${param.roomID};</script>
+        
         <div class="viewWrapper">
             <div class="roomchat">
                 <ol class="rooms" id="displayRoomArea">

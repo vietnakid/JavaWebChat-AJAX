@@ -7,6 +7,7 @@ package model;
 
 import dao.DatabaseDAO;
 import entity.Rooms;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +29,7 @@ public class RoomModel {
         databaseDAO.deleteUserFromRoom(userID, roomID);
     }
     
-    public List<Integer> getRoomIDsWithUserID(int userID) {
+    public ArrayList<Integer> getRoomIDsWithUserID(int userID) {
         return databaseDAO.getRoomIDsWithUserID(userID);
     }
     

@@ -10,7 +10,7 @@ function initHandleGetMessageRequest() {
 }
 
 function getMessages() {
-    var parameters = "";
+    var parameters = "roomID="+roomID;
     getMessageRequest = initXMLHttpRequest();
     getMessageRequest.open("POST", getMessageServletUrl, true);
     getMessageRequest.onreadystatechange = function() {

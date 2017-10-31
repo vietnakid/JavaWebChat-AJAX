@@ -5,6 +5,7 @@
  */
 package controller;
 
+import entity.Messages;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.MessageModel;
 
 /**
  *
@@ -46,13 +48,20 @@ public class HandleGetMessageController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ArrayList<String> messages =  TemporaryMessages.getMessages();
+        
+        String roomIDPlain = request.getParameter("roomID");
+        System.out.println(roomIDPlain);
+        int roomID = Integer.parseInt(roomIDPlain);
+        
+        MessageModel messageModel = new MessageModel();
+        ArrayList<Messages> messages =  messageModel.getAllMessageInRoom(roomID);
         StringBuffer messageXML = new StringBuffer();
-        for (String message : messages) {
+        for (Messages message : messages) {
             messageXML.append("<message>");
-            messageXML.append("<content>" + message + "</content>");
-            messageXML.append("<userid>" + (message.length()%2 + 1) + "</userid>");
-            messageXML.append("<timeUploaded>" + new Date() + "</timeUploaded>");
+            messageXML.append("<content>" + message.getContent() + "</content>");
+            //@Todo: edit userId
+            messageXML.append("<userid>" + (message.getContent().length()%2 + 1) + "</userid>");
+            messageXML.append("<timeUploaded>" + message.getTimeUploaded() + "</timeUploaded>");
             messageXML.append("</message>");
         }
         response.setContentType("text/xml");

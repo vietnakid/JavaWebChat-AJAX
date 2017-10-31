@@ -22,7 +22,7 @@ public class MessageModel {
         databaseDAO.createNewMessage(userId, RoomId, content, dateUploaded);
     }
     
-    public List<Messages> getAllMessageInRoom(int roomID) {
+    public ArrayList<Messages> getAllMessageInRoom(int roomID) {
         return databaseDAO.getAllMessageInRoom(roomID);
     }
 }

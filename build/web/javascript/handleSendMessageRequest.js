@@ -16,9 +16,10 @@ function detectSendMessageByPressEnter() {
         var keyCode = event.keyCode || event.which;
         var enterKeyCode = '13';
         if (keyCode == enterKeyCode){
-          var message = chatField.value;
-          sendMessge(message);
-          clearChatField();
+            var contentMessage = chatField.value;
+            if (contentMessage !== "")
+                sendMessge(contentMessage);
+            clearChatField();
         }
     };
 }
@@ -27,9 +28,8 @@ function clearChatField() {
     chatField.value = "";
 }
 
-function sendMessge(message) {
-    var parameters = "message="+message;
-//    console.log("message handleSendMessageRequest = " + message);
+function sendMessge(content) {
+    var parameters = "content="+content+"&roomID="+roomID;
     sendMessageRequest = initXMLHttpRequest();
     sendMessageRequest.open("POST", sendMessageServletUrl, true);
     sendMessageRequest.onreadystatechange = handleSendMessageRespone();
