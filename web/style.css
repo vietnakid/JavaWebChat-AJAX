@@ -386,6 +386,20 @@ body :-ms-input-placeholder {
   margin-top: -200px;
   overflow: hidden;
 }
+.wrapper-banner{
+    background: #50a3a2;
+    background: -webkit-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
+    background: -moz-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
+    background: -o-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
+    background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
+    position: absolute;
+    top: 22%;
+    left: 0;
+    width: 100%;
+    height: 802px;
+    margin-top: -200px;
+    overflow: hidden;
+}
 .wrapper-register {
   background: #50a3a2;
   background: -webkit-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
@@ -549,6 +563,9 @@ form button:hover {
 }
 .gender-radio{
     margin-left: 8%;
+}
+.Register{
+    color: white;
 }
 
 @-webkit-keyframes square {

@@ -4,6 +4,10 @@
         <servlet-name>AccountController</servlet-name>
         <servlet-class>controller.AccountController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BannedWordController</servlet-name>
+        <servlet-class>controller.BannedWordController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AccountController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/Register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BannedWordController</servlet-name>
+        <url-pattern>/BannedWord</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

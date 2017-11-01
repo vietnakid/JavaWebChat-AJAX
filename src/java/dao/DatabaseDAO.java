@@ -8,6 +8,7 @@ package dao;
 
 
 import context.DBContext;
+
 import entity.Messages;
 import entity.Rooms;
 import entity.Users;
@@ -191,5 +192,30 @@ public class DatabaseDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public void AddNewBannerWord(String word){
+        PreparedStatement pre;
+        try {
+            pre = connection.prepareStatement("insert into BannedWords(bannedWord) values (?)");
+             pre.setString(1, word);
+             pre.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }
+    public List<String> getAllBannerWordst() {
+        List<String> ListWord = new ArrayList<String>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select * from BannedWords");
+            while (rs.next()) {
+                ListWord.add(rs.getString("bannedWord"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return ListWord;
     }
 }
