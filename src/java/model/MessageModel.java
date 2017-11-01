@@ -25,4 +25,11 @@ public class MessageModel {
     public ArrayList<Messages> getAllMessageInRoom(int roomID) {
         return databaseDAO.getAllMessageInRoom(roomID);
     }
+    
+    public void AddNewBannerWord(String word){
+        databaseDAO.AddNewBannerWord(word);
+    }
+    public List<String> getAllBannerWords() {
+        return databaseDAO.getAllBannerWordst();
+    }
 }

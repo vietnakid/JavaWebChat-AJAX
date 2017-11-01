@@ -41,6 +41,11 @@
         <servlet-name>CreateRoomChat</servlet-name>
         <servlet-class>controller.CreateRoomChat</servlet-class>
     </servlet>
+     <servlet>
+        <servlet-name>BannedWordController</servlet-name>
+        <servlet-class>controller.BannedWordController</servlet-class>
+    </servlet>
+    
     <servlet-mapping>
         <servlet-name>HandleSendMessageController</servlet-name>
         <url-pattern>/HandleSendMessageController</url-pattern>
@@ -84,6 +89,10 @@
     <servlet-mapping>
         <servlet-name>CreateRoomChat</servlet-name>
         <url-pattern>/CreateRoomChat</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>BannedWordController</servlet-name>
+        <url-pattern>/BannedWord</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
