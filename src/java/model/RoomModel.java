@@ -17,8 +17,8 @@ import java.util.List;
 public class RoomModel {
     DatabaseDAO databaseDAO = new DatabaseDAO();
     
-    public void createNewRoomWithName(String roomName) {
-        databaseDAO.createNewRoomWithName(roomName);
+    public int createNewRoomWithName(String roomName) {
+        return databaseDAO.createNewRoomWithName(roomName);
     }
     
     public void addUserToRoom(int userID, int roomID) {
@@ -38,6 +38,8 @@ public class RoomModel {
     }
     
     public boolean inUserIdInRoomId(int userID, int RoomID) {
+        if (RoomID == 0) return true;
+        
         return databaseDAO.inUserIdInRoomId(userID, RoomID);
     }
 }

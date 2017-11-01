@@ -19,7 +19,9 @@
     </head>
     <body onload="initalPage()">
         
-        <script>var roomID = ${param.roomID};</script>
+        <script>
+            roomID = "${not empty param.roomID ? param.roomID : 0}";
+        </script>
         
         <div class="viewWrapper">
             <div class="roomchat">

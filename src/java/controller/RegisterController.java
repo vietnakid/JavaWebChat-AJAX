@@ -18,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.RoomModel;
 import model.UserModel;
 
 /**
@@ -26,9 +27,11 @@ import model.UserModel;
  */
 public class RegisterController extends HttpServlet {
     private UserModel usermodel;
+    private RoomModel roomModel;
     public RegisterController() {
         super();
         usermodel = new UserModel();
+        roomModel = new RoomModel();
     }
 
    
@@ -53,7 +56,10 @@ public class RegisterController extends HttpServlet {
             try {
                 startDate = df.parse(startDateStr);
                 
-                usermodel.Register(username, startDate, pw, Gender);
+                int userID = usermodel.Register(username, startDate, pw, Gender);
+                
+                int roomID = roomModel.createNewRoomWithName(username);
+                roomModel.addUserToRoom(userID, roomID);
             } catch (ParseException e) {
                 e.printStackTrace();
             }

@@ -15,7 +15,9 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import model.RoomModel;
+import model.UserModel;
 
 /**
  *
@@ -30,20 +32,28 @@ public class AccessChatRoomFilter implements Filter{
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        String plainRoomID = request.getParameter("roomID");
-        int roomID = Integer.parseInt(plainRoomID);
         RoomModel roomModel = new RoomModel();
+        UserModel userModel = new UserModel();
+        
+        int roomID = 0;
+        int userId = userModel.getUserIdFromCookie(request);
+        
+        try {
+            String plainRoomID = request.getParameter("roomID");
+            System.out.println(plainRoomID);
+            roomID = Integer.parseInt(plainRoomID);
+        } catch (NumberFormatException e) {
+            System.out.println(roomModel.getRoomIDsWithUserID(userId));
+            roomID = roomModel.getRoomIDsWithUserID(userId).get(0);
+            ((HttpServletResponse)response).sendRedirect("chat.jsp?roomID="+roomID);
+        }
+        
         Rooms room = roomModel.getRoomInfoByRoomID(roomID);
         request.setAttribute("room", room);
         
-        Cookie[] cookies = ((HttpServletRequest)request).getCookies();
-        int userID = 0;
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equalsIgnoreCase("userID")) {
-                userID = Integer.parseInt(cookie.getValue());
-            }
-        }
-        if (roomModel.inUserIdInRoomId(userID, roomID)) {
+        
+
+        if (roomModel.inUserIdInRoomId(userId, roomID)) {
             chain.doFilter(request, response);
         } else {
             //@Todo: send to error page

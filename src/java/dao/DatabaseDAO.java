@@ -38,15 +38,21 @@ public class DatabaseDAO {
         }
     }
     
-    public void createNewRoomWithName(String roomName) {
+    public int createNewRoomWithName(String roomName) {
+        int roomID = 0;
         try {
-            String query = "INSERT INTO Rooms (room_name) VALUES (?)";
+            String query = "INSERT INTO Rooms (room_name) VALUES (?); SELECT SCOPE_IDENTITY()";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, roomName);
             statement.executeUpdate();
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            while (generatedKeys.next()) {
+                roomID = generatedKeys.getInt(1);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return roomID;
     }
     
     public void addUserToRoom(int userID, int roomID) {
@@ -262,19 +268,24 @@ public class DatabaseDAO {
         return false;
     }
     
-    public void Register(String username,Date DateOfBirth, String pw, String sex) {
+    public int Register(String username,Date DateOfBirth, String pw, String sex) {
+        int userID = 0;
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("insert into Users(username,date_of_birth,pw,sex) values (?, ?, ?, ?)");
+                    .prepareStatement("insert into Users(username,date_of_birth,pw,sex) values (?, ?, ?, ?); SELECT SCOPE_IDENTITY()");
             // Parameters start with 1
             preparedStatement.setString(1, username);
             preparedStatement.setDate(2, new java.sql.Date(DateOfBirth.getTime()));
             preparedStatement.setString(3, pw);
             preparedStatement.setString(4, sex);
             preparedStatement.executeUpdate();
-
+            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+            while (generatedKeys.next()) {
+                userID = generatedKeys.getInt(1);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return userID;
     }
 }

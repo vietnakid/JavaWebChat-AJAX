@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -82,6 +83,8 @@ public class AccountController extends HttpServlet {
         
         if(usermodel.CheckAuthen(id, pw) == true){
             session.setAttribute("user", user);
+            Cookie uesrIDCookie = new Cookie("userID", String.valueOf(user.getUserID()));
+            response.addCookie(uesrIDCookie);
             response.sendRedirect(Home);
         }else{
             PrintWriter out = response.getWriter();

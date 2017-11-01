@@ -10,6 +10,9 @@ import entity.Users;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.servlet.ServletRequest;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -39,7 +42,18 @@ public class UserModel {
     public Boolean CheckAuthen(String userID, String pw){
         return databaseDAO.CheckAuthen(userID, pw);
     }
-    public void Register(String username, Date DateOfBirth, String pw, String sex) {
-        databaseDAO.Register(username, DateOfBirth, pw, sex);
+    public int Register(String username, Date DateOfBirth, String pw, String sex) {
+        return databaseDAO.Register(username, DateOfBirth, pw, sex);
+    }
+    
+    public int getUserIdFromCookie(ServletRequest request) {
+        Cookie[] cookies = ((HttpServletRequest)request).getCookies();
+        int userID = 0;
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equalsIgnoreCase("userID")) {
+                userID = Integer.parseInt(cookie.getValue());
+            }
+        }
+        return userID;
     }
 }
