@@ -6,6 +6,7 @@
 package controller;
 
 import entity.Messages;
+import entity.Users;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.MessageModel;
+import model.UserModel;
 
 /**
  *
@@ -54,12 +56,15 @@ public class HandleGetMessageController extends HttpServlet {
         
         MessageModel messageModel = new MessageModel();
         ArrayList<Messages> messages =  messageModel.getAllMessageInRoom(roomID);
+        UserModel userModel = new UserModel();
         StringBuffer messageXML = new StringBuffer();
         for (Messages message : messages) {
             messageXML.append("<message>");
             messageXML.append("<content>" + message.getContent() + "</content>");
             //@Todo: edit userId
             messageXML.append("<userid>" + message.getUserID() + "</userid>");
+            Users user = userModel.getUserInfo(message.getUserID());
+            messageXML.append("<username>" + user.getUserName() + "</username>");
             messageXML.append("<timeUploaded>" + message.getTimeUploaded() + "</timeUploaded>");
             messageXML.append("</message>");
         }

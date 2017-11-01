@@ -43,6 +43,7 @@ function clearDisplayMessageArea() {
 function appendMessage(message) {
     var content = message.getElementsByTagName("content")[0].textContent;
     var userID = message.getElementsByTagName("userid")[0].textContent;
+    var userName = message.getElementsByTagName("username")[0].textContent;
     var timeUploaded = message.getElementsByTagName("timeUploaded")[0].textContent;
     
     var row;
@@ -54,7 +55,8 @@ function appendMessage(message) {
         row.setAttribute("class", "self");
     cell = document.createElement("div");
     cell.setAttribute("class", "msg");
-    cell.innerHTML = "<p>" + content + "</p>";
+    cell.innerHTML = "<h4><i style=\"color: blue;\">" + userName +"</i></h4>";
+    cell.innerHTML += "<p>" + content + "</p>";
     cell.innerHTML += "<time>" + timeUploaded + "</time>";
     row.appendChild(cell);
     displayMessageArea.appendChild(row);
