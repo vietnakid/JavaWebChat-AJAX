@@ -30,4 +30,16 @@ public class UserModel {
         return databaseDAO.getAllUsers();
     }
     
+    public List<Users> getAllAccount() {
+        return databaseDAO.getAllAccount();
+    }
+     public Users getAccountById(String username) {
+         return databaseDAO.getAccountById(username);
+     }
+    public Boolean CheckAuthen(String userID, String pw){
+        return databaseDAO.CheckAuthen(userID, pw);
+    }
+    public void Register(String username, Date DateOfBirth, String pw, String sex) {
+        databaseDAO.Register(username, DateOfBirth, pw, sex);
+    }
 }

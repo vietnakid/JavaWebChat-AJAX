@@ -5,6 +5,8 @@
  */
 package dao;
 
+
+
 import context.DBContext;
 import entity.Messages;
 import entity.Rooms;
@@ -13,6 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -201,5 +204,77 @@ public class DatabaseDAO {
             Logger.getLogger(DatabaseDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+     public List<Users> getAllAccount() {
+        List<Users> ListUser = new ArrayList<Users>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select * from Users");
+            while (rs.next()) {
+                Users users = new Users();
+                users.setUserID(rs.getInt("userid"));
+                users.setUserName(rs.getString("username"));
+                users.setDateOfBirth(rs.getDate("date_of_birth"));
+                users.setPassword(rs.getString("pw"));
+                users.setSex(rs.getString("sex"));
+                ListUser.add(users);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return ListUser;
+    }
+    
+    
+    public Users getAccountById(String username) {
+        Users user = new Users();
+        try {
+            PreparedStatement preparedStatement = connection.
+                    prepareStatement("select * from users where username=?");
+            preparedStatement.setString(1, username);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+               user.setUserID(rs.getInt("userid"));
+                user.setUserName(rs.getString("username"));
+                user.setDateOfBirth(rs.getDate("date_of_birth"));
+                user.setPassword(rs.getString("pw"));
+                user.setSex(rs.getString("sex"));
+                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return user;
+    }
+    
+    
+    public Boolean CheckAuthen(String userID, String pw){
+        for (int i = 0; i < getAllAccount().size(); i++) {
+            String userdb = getAllAccount().get(i).getUserName().trim();
+            String pwdb = getAllAccount().get(i).getPassword().trim();
+            if(userID.equals(userdb) && pw.equals(pwdb)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public void Register(String username,Date DateOfBirth, String pw, String sex) {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("insert into Users(username,date_of_birth,pw,sex) values (?, ?, ?, ?)");
+            // Parameters start with 1
+            preparedStatement.setString(1, username);
+            preparedStatement.setDate(2, new java.sql.Date(DateOfBirth.getTime()));
+            preparedStatement.setString(3, pw);
+            preparedStatement.setString(4, sex);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
