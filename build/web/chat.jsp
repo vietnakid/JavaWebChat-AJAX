@@ -9,6 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
         <title>${room.roomName}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script type="text/javascript" src="javascript/initalWhenChatPageLoad.js?n=1"> </script>
@@ -32,7 +33,8 @@
         
         <div class="viewWrapper">
             <div class="roomchat">
-                <div class="name">Your Rooms</div>
+                <div class="yourroom">Your Rooms</div>
+                
                 <div class="addRoom">
                     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#createRoomModal" onclick="getAllUsers()">New</button>
                 </div>

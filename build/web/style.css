@@ -63,6 +63,7 @@ a{
     font-size: 30px;
     display: inline;
     text-align: center;
+    color: white;
 }
 
 .addRoom {
@@ -116,6 +117,17 @@ a{
 .back:active {
     background: rgba(255,255,255,0.2);
 }
+
+.yourroom {
+    text-align: center;
+    top: 3px;
+    font-family: 'Lato';
+    font-size: 25px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.98);
+    cursor: default;
+}
+
 .name{
     position: absolute;
     top: 3px;
