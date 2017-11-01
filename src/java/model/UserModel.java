@@ -8,6 +8,7 @@ package model;
 import dao.DatabaseDAO;
 import entity.Users;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -23,5 +24,16 @@ public class UserModel {
     public Users getUserInfo(int userID) {
         return databaseDAO.getUserInfo(userID);
     }
-    
+    public List<Users> getAllAccount() {
+        return databaseDAO.getAllAccount();
+    }
+     public Users getAccountById(String username) {
+         return databaseDAO.getAccountById(username);
+     }
+    public Boolean CheckAuthen(String userID, String pw){
+        return databaseDAO.CheckAuthen(userID, pw);
+    }
+    public void Register(String username, Date DateOfBirth, String pw, String sex) {
+        databaseDAO.Register(username, DateOfBirth, pw, sex);
+    }
 }
