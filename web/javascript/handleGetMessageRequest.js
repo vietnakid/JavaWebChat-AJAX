@@ -61,7 +61,7 @@ function appendMessage(message) {
 }
 
 function isOtherMessage(userID) {
-    if (userID == getSelfUserId()) {
+    if (userID.trim() === getSelfUserId().trim()) {
         return true;
     }
     return false;

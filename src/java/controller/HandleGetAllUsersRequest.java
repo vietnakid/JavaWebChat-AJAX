@@ -5,22 +5,22 @@
  */
 package controller;
 
-import entity.Messages;
+import entity.Users;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.MessageModel;
+import model.UserModel;
 
 /**
  *
  * @author KiD
  */
-public class HandleGetMessageController extends HttpServlet {
+public class HandleGetAllUsersRequest extends HttpServlet {
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -34,7 +34,6 @@ public class HandleGetMessageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
     }
 
     /**
@@ -48,26 +47,21 @@ public class HandleGetMessageController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        UserModel userModel = new UserModel();
+        ArrayList<Users> users = userModel.getAllUsers();
         
-        String roomIDPlain = request.getParameter("roomID");
-        int roomID = Integer.parseInt(roomIDPlain);
-        
-        MessageModel messageModel = new MessageModel();
-        ArrayList<Messages> messages =  messageModel.getAllMessageInRoom(roomID);
-        StringBuffer messageXML = new StringBuffer();
-        for (Messages message : messages) {
-            messageXML.append("<message>");
-            messageXML.append("<content>" + message.getContent() + "</content>");
-            //@Todo: edit userId
-            messageXML.append("<userid>" + message.getUserID() + "</userid>");
-            messageXML.append("<timeUploaded>" + message.getTimeUploaded() + "</timeUploaded>");
-            messageXML.append("</message>");
+        StringBuffer userXML = new StringBuffer();
+        for (Users user : users) {
+            userXML.append("<user>");
+            userXML.append("<username>" +user.getUserName().trim() + "</username>");
+            userXML.append("<userid>" + user.getUserID() + "</userid>");
+            userXML.append("</user>");
         }
         response.setContentType("text/xml");
         response.setHeader("Cache-Control", "no-cache");
-        response.getWriter().write("<messages>");
-        response.getWriter().write(messageXML.toString());
-        response.getWriter().write("</messages>");
+        response.getWriter().write("<users>");
+        response.getWriter().write(userXML.toString());
+        response.getWriter().write("</users>");
     }
 
     /**

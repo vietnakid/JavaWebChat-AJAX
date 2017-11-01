@@ -5,22 +5,23 @@
  */
 package controller;
 
-import entity.Messages;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.MessageModel;
+import model.RoomModel;
+import model.UserModel;
 
 /**
  *
  * @author KiD
  */
-public class HandleGetMessageController extends HttpServlet {
+public class CreateRoomChat extends HttpServlet {
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -34,7 +35,6 @@ public class HandleGetMessageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
     }
 
     /**
@@ -48,26 +48,30 @@ public class HandleGetMessageController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String roomIDPlain = request.getParameter("roomID");
-        int roomID = Integer.parseInt(roomIDPlain);
-        
-        MessageModel messageModel = new MessageModel();
-        ArrayList<Messages> messages =  messageModel.getAllMessageInRoom(roomID);
-        StringBuffer messageXML = new StringBuffer();
-        for (Messages message : messages) {
-            messageXML.append("<message>");
-            messageXML.append("<content>" + message.getContent() + "</content>");
-            //@Todo: edit userId
-            messageXML.append("<userid>" + message.getUserID() + "</userid>");
-            messageXML.append("<timeUploaded>" + message.getTimeUploaded() + "</timeUploaded>");
-            messageXML.append("</message>");
+        Map<String, String[]> parameters = request.getParameterMap();
+        String roomName = "";
+        ArrayList<Integer> userIDs = new ArrayList<>();
+        for (Map.Entry<String, String[]> entry : parameters.entrySet()) {
+            String key = entry.getKey();
+            String[] value = entry.getValue();
+            if (key.equalsIgnoreCase("roomNameInput")) {
+                roomName = value[0];
+            } else {
+                userIDs.add(Integer.parseInt(key));
+            }  
         }
-        response.setContentType("text/xml");
-        response.setHeader("Cache-Control", "no-cache");
-        response.getWriter().write("<messages>");
-        response.getWriter().write(messageXML.toString());
-        response.getWriter().write("</messages>");
+        RoomModel roomModel = new RoomModel();
+        int roomID = roomModel.createNewRoomWithName(roomName);
+        
+        UserModel userModel = new UserModel();
+        int currentUserId = userModel.getUserIdFromCookie(request);
+        roomModel.addUserToRoom(currentUserId, roomID);
+        
+        for (Integer userID : userIDs) {
+            roomModel.addUserToRoom(userID, roomID);
+        }
+        
+        response.sendRedirect("chat.jsp?roomID="+roomID);
     }
 
     /**

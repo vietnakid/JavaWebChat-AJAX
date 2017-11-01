@@ -106,7 +106,6 @@ public class DatabaseDAO {
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         return user;
     }
     

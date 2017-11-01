@@ -27,6 +27,12 @@ a{
     overflow-x: hidden;
     overflow-y: scroll;
 }
+
+.rooms {
+    margin-top: 40px;
+}
+
+
 .chatview {
     width: 70%;
     float: left;
@@ -53,6 +59,33 @@ a{
     -ms-user-select: none;
 }
 
+.roomName {
+    font-size: 30px;
+    display: inline;
+    text-align: center;
+}
+
+.addRoom {
+    float: right;
+    width: 30px;
+    height: 30px;
+    top: 0px;
+    margin-top: 5px;
+    margin-right: 60px;
+    color: #fff;
+    line-height: 30px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.addRoom:active {
+    background: rgba(255,255,255,0.2);
+}
+
+.floatleft {
+    float: left;
+}
+
 .back {
     position: absolute;
     width: 90px;
@@ -65,6 +98,7 @@ a{
     padding-left: 10px;
     cursor: pointer;
 }
+
 .back img {
     position: absolute;
     top: 5px;
@@ -78,6 +112,7 @@ a{
     -ms-border-radius: 100%;
     margin-left: 15px;
     }
+    
 .back:active {
     background: rgba(255,255,255,0.2);
 }
@@ -212,7 +247,7 @@ a{
     box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.07);
 }
 .msg p {
-    font-size: 0.8rem;
+    font-size: 16px;
     margin: 0 0 0.2rem 0;
     color: #777;
 }
@@ -241,7 +276,7 @@ a{
 }
 
 .msg time {
-    font-size: 0.7rem;
+    font-size: 12px;
     color: #ccc;
     margin-top: 3px;
     float: right;

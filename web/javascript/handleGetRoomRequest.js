@@ -24,6 +24,7 @@ function getRooms() {
 
 function handleGetRoomRespone(roomXML) {
     clearDisplayRoomArea();
+    
     if (roomXML == null) {
         return false;
     } else {
@@ -33,7 +34,7 @@ function handleGetRoomRespone(roomXML) {
             appendRoom(room);
         }
     }
-    setTimeout(getMessages, 1000);
+    setTimeout(getRooms, 1000);
 }
 
 function clearDisplayRoomArea() {
@@ -48,8 +49,11 @@ function appendRoom(room) {
     var cell;
     row = document.createElement("li");
     cell = document.createElement("div");
-    cell.innerHTML = "</br><a href=\"chat.jsp?roomID=" + roomID + "\"><img src=\"https://i.imgur.com/DY6gND0.png\" height=\"40px\" width=\"40px\" draggable=\"false\">"
-    cell.innerHTML += roomName + "</a></br>";
+    var innerHTML;
+    innerHTML = "</br><a href=\"chat.jsp?roomID=" + roomID + "\">";
+    innerHTML += "<img src=\"https://i.imgur.com/DY6gND0.png\" height=\"40px\" width=\"40px\" draggable=\"false\">";
+    innerHTML += "<div class=\"roomName\">" + roomName + "</div></a></br>";
+    cell.innerHTML = innerHTML;
     row.appendChild(cell);
     displayRoomArea.appendChild(row);
 }

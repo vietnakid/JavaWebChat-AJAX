@@ -34,7 +34,6 @@ public class AccessChatRoomFilter implements Filter{
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         RoomModel roomModel = new RoomModel();
         UserModel userModel = new UserModel();
-        
         int roomID = 0;
         int userId = userModel.getUserIdFromCookie(request);
         

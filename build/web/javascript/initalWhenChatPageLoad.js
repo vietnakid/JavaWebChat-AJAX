@@ -2,6 +2,7 @@ function initalPage() {
     initHandleSendMessageRequest();
     initHandleGetMessageRequest();
     initHandleGetRoomRequest();
+    initHandleGetAllUsersRequest();
 }
 
 function initXMLHttpRequest() {
@@ -17,7 +18,7 @@ function initXMLHttpRequest() {
 }
 
 function getSelfUserId() {
-    return getCookie("userid");
+    return getCookie("userID");
 }
 
 function getCookie(cookieName) {
