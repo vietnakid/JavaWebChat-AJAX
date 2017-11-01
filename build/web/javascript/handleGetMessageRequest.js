@@ -49,7 +49,7 @@ function appendMessage(message) {
     var row;
     var cell;
     row = document.createElement("li");
-    if (isOtherMessage(userID)) 
+    if (isOtherUser(userID)) 
         row.setAttribute("class", "other");
     else
         row.setAttribute("class", "self");
@@ -62,8 +62,8 @@ function appendMessage(message) {
     displayMessageArea.appendChild(row);
 }
 
-function isOtherMessage(userID) {
-    if (userID.trim() === getSelfUserId().trim()) {
+function isOtherUser(userID) {
+    if (userID.trim() !== getSelfUserId().trim()) {
         return true;
     }
     return false;

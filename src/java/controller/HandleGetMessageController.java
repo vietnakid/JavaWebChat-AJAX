@@ -8,9 +8,8 @@ package controller;
 import entity.Messages;
 import entity.Users;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +22,8 @@ import model.UserModel;
  * @author KiD
  */
 public class HandleGetMessageController extends HttpServlet {
+    MessageModel messageModel = new MessageModel();
+    UserModel userModel = new UserModel();
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -53,14 +54,14 @@ public class HandleGetMessageController extends HttpServlet {
         
         String roomIDPlain = request.getParameter("roomID");
         int roomID = Integer.parseInt(roomIDPlain);
-        
-        MessageModel messageModel = new MessageModel();
+
         ArrayList<Messages> messages =  messageModel.getAllMessageInRoom(roomID);
-        UserModel userModel = new UserModel();
+        
         StringBuffer messageXML = new StringBuffer();
         for (Messages message : messages) {
             messageXML.append("<message>");
-            messageXML.append("<content>" + message.getContent() + "</content>");
+            String content = sovleBanedWords(message.getContent());
+            messageXML.append("<content>" + content + "</content>");
             //@Todo: edit userId
             messageXML.append("<userid>" + message.getUserID() + "</userid>");
             Users user = userModel.getUserInfo(message.getUserID());
@@ -85,4 +86,25 @@ public class HandleGetMessageController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    protected String sovleBanedWords(String content) {
+        String res = "";
+        List<String> listBannedWords = messageModel.getAllBannerWords();
+        String[] words = content.split(" ");
+        for (String word : words) {
+            boolean isBannedWord = false;
+            for(String bannedWord : listBannedWords) {
+                if (word.equalsIgnoreCase(bannedWord)) {
+                    isBannedWord = true;
+                    break;
+                }
+            }
+            
+            if (isBannedWord) {
+                res += "*** ";
+            } else {
+                res += word + " ";
+            }
+        }
+        return res;
+    }
 }

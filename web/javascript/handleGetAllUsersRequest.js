@@ -47,10 +47,12 @@ function clearDisplayAllUsersArea() {
 function appendUser(user) {
     var userName = user.getElementsByTagName("username")[0].textContent;
     var userID = user.getElementsByTagName("userid")[0].textContent;
-    
+    var gender = user.getElementsByTagName("gender")[0].textContent;
+    var dateOfBirth = user.getElementsByTagName("dateofbirth")[0].textContent;
+    if (!isOtherUser(userID)) return;
     var row;
     row = document.createElement("label");
-    row.innerHTML = "<input type=\"checkbox\" name=\"" + userID + "\">" + userName;
+    row.innerHTML = "<input type=\"checkbox\" name=\"" + userID + "\">" + userName + " | " + gender + " | " + dateOfBirth;
     displayUsersArea.appendChild(row);
     displayUsersArea.appendChild(document.createElement("br"));
 }

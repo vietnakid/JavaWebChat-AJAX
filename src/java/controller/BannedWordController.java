@@ -37,7 +37,7 @@ public class BannedWordController extends HttpServlet {
             throws ServletException, IOException {
        String word = request.getParameter("word");
        messagemodel.AddNewBannerWord(word);
-       response.sendRedirect("/Chat/BannerWord.jsp");
+       response.sendRedirect("/Chat/BannedWord.jsp");
     }
 
     

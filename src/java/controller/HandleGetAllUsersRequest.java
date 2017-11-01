@@ -55,6 +55,8 @@ public class HandleGetAllUsersRequest extends HttpServlet {
             userXML.append("<user>");
             userXML.append("<username>" +user.getUserName().trim() + "</username>");
             userXML.append("<userid>" + user.getUserID() + "</userid>");
+            userXML.append("<gender>" + user.getSex()+ "</gender>");
+            userXML.append("<dateofbirth>" + user.getDateOfBirth()+ "</dateofbirth>");
             userXML.append("</user>");
         }
         response.setContentType("text/xml");
