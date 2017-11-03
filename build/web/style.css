@@ -66,6 +66,19 @@ a{
     color: white;
 }
 
+.logOut {
+    float: left;
+    width: 30px;
+    height: 30px;
+    top: 0px;
+    margin-top: 5px;
+    margin-left: 60px;
+    color: #fff;
+    line-height: 30px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
 .addRoom {
     float: right;
     width: 30px;

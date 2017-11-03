@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.RoomModel;
+import model.UserModel;
 
 /**
  *
@@ -22,7 +23,9 @@ import model.RoomModel;
  */
 public class HandleGetRoomController extends HttpServlet {
 
-
+    RoomModel roomModel = new RoomModel();
+    UserModel userModel = new UserModel();
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -48,15 +51,9 @@ public class HandleGetRoomController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Cookie[] cookies = request.getCookies();
-        int userID = 0;
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equalsIgnoreCase("userID")) {
-                userID = Integer.parseInt(cookie.getValue());
-            }
-        }
+
+        int userID = userModel.getUserIdFromCookie(request); 
         
-        RoomModel roomModel = new RoomModel();
         ArrayList<Integer> roomIDs =  roomModel.getRoomIDsWithUserID(userID);
         ArrayList<Rooms> rooms = new ArrayList<>();
         for (Integer roomID : roomIDs) {

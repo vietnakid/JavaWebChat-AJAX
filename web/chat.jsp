@@ -38,6 +38,9 @@
                 <div class="addRoom">
                     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#createRoomModal" onclick="getAllUsers()">New</button>
                 </div>
+                <div class="logOut">
+                    <a href="logout.jsp"><button type="button" class="btn btn-info btn-lg">Logout</button></a>
+                </div>
                 <!-- Modal -->
                 <div class="modal fade" id="createRoomModal" role="dialog">
                   <div class="modal-dialog">

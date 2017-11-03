@@ -49,9 +49,11 @@ public class UserModel {
     public int getUserIdFromCookie(ServletRequest request) {
         Cookie[] cookies = ((HttpServletRequest)request).getCookies();
         int userID = 0;
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equalsIgnoreCase("userID")) {
-                userID = Integer.parseInt(cookie.getValue());
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equalsIgnoreCase("userID")) {
+                    userID = Integer.parseInt(cookie.getValue());
+                }
             }
         }
         return userID;

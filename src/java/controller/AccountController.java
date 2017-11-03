@@ -56,7 +56,7 @@ public class AccountController extends HttpServlet {
             throws ServletException, IOException {
         
         
-        RequestDispatcher view = request.getRequestDispatcher("login.html");
+        RequestDispatcher view = request.getRequestDispatcher("login.jsp");
         view.forward(request, response);
         
     }
@@ -83,9 +83,11 @@ public class AccountController extends HttpServlet {
         
         if(usermodel.CheckAuthen(id, pw) == true){
             session.setAttribute("user", user);
-            Cookie uesrIDCookie = new Cookie("userID", String.valueOf(user.getUserID()));
-            response.addCookie(uesrIDCookie);
+            Cookie userIDCookie = new Cookie("userID", String.valueOf(user.getUserID()));
+            userIDCookie.setMaxAge(3600);
+            response.addCookie(userIDCookie);
             response.sendRedirect(Home);
+            return;
         }else{
             PrintWriter out = response.getWriter();
             out.println("<script type=\"text/javascript\">");

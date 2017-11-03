@@ -49,7 +49,7 @@ public class HandleGetAllUsersRequest extends HttpServlet {
             throws ServletException, IOException {
         UserModel userModel = new UserModel();
         ArrayList<Users> users = userModel.getAllUsers();
-        
+            
         StringBuffer userXML = new StringBuffer();
         for (Users user : users) {
             userXML.append("<user>");

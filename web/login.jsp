@@ -14,7 +14,7 @@
                         <button type="submit" id="login-button" value="Submit">Login</button>
                         
 		</form>
-                <a class="Register" href="/Chat/Register.html">Register</a>
+                <a class="Register" href="/Chat/register.jsp">Register</a>
 
 	</div>
 	

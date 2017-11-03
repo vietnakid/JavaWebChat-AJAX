@@ -37,25 +37,23 @@ public class AccessChatRoomFilter implements Filter{
         int roomID = 0;
         int userId = userModel.getUserIdFromCookie(request);
         
-        try {
-            String plainRoomID = request.getParameter("roomID");
-            System.out.println(plainRoomID);
-            roomID = Integer.parseInt(plainRoomID);
-        } catch (NumberFormatException e) {
-            System.out.println(roomModel.getRoomIDsWithUserID(userId));
+
+        String plainRoomID = request.getParameter("roomID");
+        if (plainRoomID == null) {
             roomID = roomModel.getRoomIDsWithUserID(userId).get(0);
             ((HttpServletResponse)response).sendRedirect("chat.jsp?roomID="+roomID);
+            return;
         }
+        roomID = Integer.parseInt(plainRoomID);
         
         Rooms room = roomModel.getRoomInfoByRoomID(roomID);
         request.setAttribute("room", room);
-        
-        
 
         if (roomModel.inUserIdInRoomId(userId, roomID)) {
             chain.doFilter(request, response);
         } else {
-            //@Todo: send to error page
+            roomID = roomModel.getRoomIDsWithUserID(userId).get(0);
+            ((HttpServletResponse)response).sendRedirect("chat.jsp?roomID="+roomID);
         }
         
     }
