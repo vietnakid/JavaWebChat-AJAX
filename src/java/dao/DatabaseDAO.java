@@ -287,6 +287,20 @@ public class DatabaseDAO {
         }
         return userID;
     }
+    
+    public void deleteUser(int userId) {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("delete from Users where userid=?");
+            // Parameters start with 1
+            preparedStatement.setInt(1, userId);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void AddNewBannerWord(String word){
         PreparedStatement pre;
         try {
