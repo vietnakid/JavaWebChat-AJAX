@@ -288,12 +288,12 @@ public class DatabaseDAO {
         return userID;
     }
     
-    public void deleteUser(int userId) {
+    public void deleteBannedWords(String word) {
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("delete from Users where userid=?");
+                    .prepareStatement("delete from BannedWords where bannedWord=?");
             // Parameters start with 1
-            preparedStatement.setInt(1, userId);
+            preparedStatement.setString(1, word);
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

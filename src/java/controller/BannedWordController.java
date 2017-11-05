@@ -7,6 +7,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +29,10 @@ public class BannedWordController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        String word = request.getParameter("wordname");
+        messagemodel.deleteWord(word);
+        RequestDispatcher view = request.getRequestDispatcher("/BannedWord.jsp");
+        view.forward(request, response);
     }
 
     

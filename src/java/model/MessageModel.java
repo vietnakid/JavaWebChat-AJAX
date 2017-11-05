@@ -25,7 +25,9 @@ public class MessageModel {
     public ArrayList<Messages> getAllMessageInRoom(int roomID) {
         return databaseDAO.getAllMessageInRoom(roomID);
     }
-    
+     public void deleteWord(String word) {
+         databaseDAO.deleteBannedWords(word);
+     }
     public void AddNewBannerWord(String word){
         databaseDAO.AddNewBannerWord(word);
     }

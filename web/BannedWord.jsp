@@ -35,8 +35,8 @@
                          List<String> list = s.getAllBannerWords();
                          for(String x:list){
                      %>
-                      "<%=x%>" 
-
+                     "<%=x%>"
+                      <button onclick="window.location = 'BannedWord?wordname=<%=x%>'">Delete</button> </br>
                      <%}%>
                </p>
                
