@@ -59,4 +59,7 @@ public class UserModel {
         }
         return userID;
     }
+    public boolean checkUserName(String name){ 
+        return databaseDAO.checkUserName(name);
+    }
 }

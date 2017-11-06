@@ -230,6 +230,16 @@ public class DatabaseDAO {
 
         return ListUser;
     }
+     public boolean checkUserName(String name)
+     {
+         for (int i = 0;  i < getAllAccount().size(); i++) {
+             if(name.equalsIgnoreCase(getAllAccount().get(i).getUserName())){
+                 return true;
+             }
+         }
+         return false;
+   
+     }
     
     
     public Users getAccountById(String username) {

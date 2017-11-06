@@ -31,8 +31,7 @@ public class BannedWordController extends HttpServlet {
             throws ServletException, IOException {
         String word = request.getParameter("wordname");
         messagemodel.deleteWord(word);
-        RequestDispatcher view = request.getRequestDispatcher("/BannedWord.jsp");
-        view.forward(request, response);
+        response.sendRedirect("BannedWord.jsp");
     }
 
     
