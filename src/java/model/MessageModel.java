@@ -19,7 +19,7 @@ public class MessageModel {
     DatabaseDAO databaseDAO = new DatabaseDAO();
     
     public void createNewMessage(int userId, int RoomId, String content, Date dateUploaded) {
-        databaseDAO.createNewMessage(userId, RoomId, content, dateUploaded);
+        databaseDAO.createNewMessage(userId, RoomId, content.trim(), dateUploaded);
     }
     
     public ArrayList<Messages> getAllMessageInRoom(int roomID) {
@@ -31,5 +31,9 @@ public class MessageModel {
     }
     public List<String> getAllBannerWords() {
         return databaseDAO.getAllBannerWordst();
+    }
+    
+    public Messages getNewestMessageInRoom(int roomID) {
+        return databaseDAO.getNewestMessageInRoom(roomID);
     }
 }

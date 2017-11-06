@@ -66,6 +66,13 @@ a{
     color: white;
 }
 
+.messagesss {
+    font-size: 15px;
+    display: inline;
+    text-align: center;
+    color: white;
+}
+
 .logOut {
     float: left;
     width: 30px;

@@ -9,6 +9,7 @@ import dao.DatabaseDAO;
 import entity.Rooms;
 import entity.Users;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,7 +20,9 @@ public class RoomModel {
     DatabaseDAO databaseDAO = new DatabaseDAO();
     
     public int createNewRoomWithName(String roomName) {
-        return databaseDAO.createNewRoomWithName(roomName);
+        int roomID = databaseDAO.createNewRoomWithName(roomName);
+        databaseDAO.createNewMessage(1, roomID, "Created room at " + new Date(), new Date());
+        return roomID;
     }
     
     public void addUserToRoom(int userID, int roomID) {

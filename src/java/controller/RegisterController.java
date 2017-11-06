@@ -18,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.MessageModel;
 import model.RoomModel;
 import model.UserModel;
 
@@ -28,10 +29,12 @@ import model.UserModel;
 public class RegisterController extends HttpServlet {
     private UserModel usermodel;
     private RoomModel roomModel;
+    private MessageModel messageModel;
     public RegisterController() {
         super();
         usermodel = new UserModel();
         roomModel = new RoomModel();
+        messageModel = new MessageModel();
     }
 
    
@@ -60,10 +63,12 @@ public class RegisterController extends HttpServlet {
                 
                 int roomID = roomModel.createNewRoomWithName(username);
                 roomModel.addUserToRoom(userID, roomID);
+                messageModel.createNewMessage(userID, roomID, "Hello man!", new Date());
+                
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-           response.sendRedirect("login.html");
+           response.sendRedirect("login.jsp");
             
         
         

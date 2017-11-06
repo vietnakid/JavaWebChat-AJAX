@@ -109,7 +109,7 @@ public class DatabaseDAO {
             statement.setInt(1, userId);
             statement.setInt(2, RoomId);
             statement.setString(3, content.trim());
-            statement.setDate(4, new java.sql.Date(dateUploaded.getTime()));
+            statement.setTimestamp(4, new java.sql.Timestamp(dateUploaded.getTime()));
             statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -189,7 +189,7 @@ public class DatabaseDAO {
                 message.setRoomID(rs.getInt("room_id"));
                 message.setUserID(rs.getInt("userid"));
                 message.setContent(rs.getString("text_content"));
-                message.setTimeUploaded(rs.getDate("TimeStamps"));
+                message.setTimeUploaded(rs.getTimestamp("TimeStamps"));
                 
                 messages.add(message);
             }
@@ -353,5 +353,25 @@ public class DatabaseDAO {
         }
 
         return ListWord;
+    }
+    
+    public Messages getNewestMessageInRoom(int roomID) {
+        Messages res = new Messages();
+        
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT TOP 1 * FROM Messages WHERE room_id = ? ORDER BY TimeStamps DESC");
+            preparedStatement.setInt(1, roomID);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                res.setUserID(rs.getInt("userid"));
+                res.setContent(rs.getString("text_content"));
+                res.setTimeUploaded(rs.getTimestamp("TimeStamps"));
+                res.setRoomID(rs.getInt("room_id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return res;
     }
 }

@@ -15,10 +15,10 @@
         <script type="text/javascript" src="javascript/initalWhenChatPageLoad.js?n=2"></script>
         <script type="text/javascript" src="javascript/handleSendMessageRequest.js?n=2"></script>
         <script type="text/javascript" src="javascript/handleGetMessageRequest.js?n=2"></script>
-        <script type="text/javascript" src="javascript/handleGetRoomRequest.js?n=2"></script>
+        <script type="text/javascript" src="javascript/handleGetRoomRequest.js?n=5"></script>
         <script type="text/javascript" src="javascript/handleGetAllUsersRequest.js?n=2"></script>
         <script type="text/javascript" src="javascript/handleConfigurationGroupClicked.js?n=3"></script>
-        <link rel="stylesheet" type="text/css" href="style.css?n=1">
+        <link rel="stylesheet" type="text/css" href="style.css?n=6">
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
