@@ -41,9 +41,7 @@ public class UserModel {
     public int Register(String username, Date DateOfBirth, String pw, String sex) {
         return databaseDAO.Register(username, DateOfBirth, pw, sex);
     }
-     public void deleteUser(int userId) {
-         databaseDAO.deleteUser(userId);
-     }
+    
     
     public int getUserIdFromCookie(ServletRequest request) {
         Cookie[] cookies = ((HttpServletRequest)request).getCookies();
@@ -56,5 +54,8 @@ public class UserModel {
             }
         }
         return userID;
+    }
+    public boolean checkUserName(String name){ 
+        return databaseDAO.checkUserName(name);
     }
 }

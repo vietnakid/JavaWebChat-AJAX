@@ -17,10 +17,10 @@ and open the template in the editor.
                     <h1>Register</h1>
 
                     <form method="POST" action='Register' class="form">
-                            User Name : <input type="text" name="id">
-                            Password : <input type="password"  name="password">
-                            Date Of Birth : <input type="date" name="DateOfBirth">
-                            Gender:</br><p class="gender"><input type="radio" name="gender" value="male"> Male <input class="gender-radio" type="radio" name="gender" value="female"> Female</p></br>
+                        User Name : <input type="text" name="id" required="">
+                        Password : <input type="password"  name="password" required="">
+                        Date Of Birth : <input type="date" name="DateOfBirth" required="">
+                        Gender:</br><p class="gender"><input type="radio" name="gender" value="male" checked=""> Male <input class="gender-radio" type="radio" name="gender" value="female"> Female</p></br>
   
                             <button type="submit" id="login-button">Register</button>
                            

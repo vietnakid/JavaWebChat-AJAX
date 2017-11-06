@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -56,20 +57,26 @@ public class RegisterController extends HttpServlet {
             String startDateStr = request.getParameter("DateOfBirth");
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
             Date startDate;
-            try {
-                startDate = df.parse(startDateStr);
-                
-                int userID = usermodel.Register(username, startDate, pw, Gender);
-                
-                int roomID = roomModel.createNewRoomWithName(username);
-                roomModel.addUserToRoom(userID, roomID);
-                messageModel.createNewMessage(userID, roomID, "Hello man!", new Date());
-                
-            } catch (ParseException e) {
-                e.printStackTrace();
+            usermodel.checkUserName(username);
+            if(usermodel.checkUserName(username)){
+                try {
+                    startDate = df.parse(startDateStr);
+
+                    int userID = usermodel.Register(username, startDate, pw, Gender);
+
+                    int roomID = roomModel.createNewRoomWithName(username);
+                    roomModel.addUserToRoom(userID, roomID);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+               response.sendRedirect("login.jsp");
+            }else{
+                PrintWriter out = response.getWriter();
+                out.println("<script type=\"text/javascript\">");
+                out.println("alert('Username already exists!!!');");
+                out.println("location='register.jsp';");
+                out.println("</script>");
             }
-           response.sendRedirect("login.jsp");
-            
         
         
     }

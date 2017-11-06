@@ -258,6 +258,16 @@ public class DatabaseDAO {
 
         return ListUser;
     }
+     public boolean checkUserName(String name)
+     {
+         for (int i = 0;  i < getAllAccount().size(); i++) {
+             if(name.equalsIgnoreCase(getAllAccount().get(i).getUserName())){
+                 return true;
+             }
+         }
+         return false;
+   
+     }
     
     
     public Users getAccountById(String username) {
@@ -316,12 +326,12 @@ public class DatabaseDAO {
         return userID;
     }
     
-    public void deleteUser(int userId) {
+    public void deleteBannedWords(String word) {
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("delete from Users where userid=?");
+                    .prepareStatement("delete from BannedWords where bannedWord=?");
             // Parameters start with 1
-            preparedStatement.setInt(1, userId);
+            preparedStatement.setString(1, word);
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
