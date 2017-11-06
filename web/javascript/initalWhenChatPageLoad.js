@@ -3,6 +3,7 @@ function initalPage() {
     initHandleGetMessageRequest();
     initHandleGetRoomRequest();
     initHandleGetAllUsersRequest();
+    initHandleConfigurationGroupClicked();
 }
 
 function initXMLHttpRequest() {

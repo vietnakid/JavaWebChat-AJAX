@@ -7,6 +7,7 @@ package model;
 
 import dao.DatabaseDAO;
 import entity.Rooms;
+import entity.Users;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +30,14 @@ public class RoomModel {
         databaseDAO.deleteUserFromRoom(userID, roomID);
     }
     
+    public void deleteUsersFromRoom(int roomID) {
+        databaseDAO.deleteUsersFromRoom(roomID);
+    }
+    
+    public void changeNameOfRoom(int roomID, String roomName) {
+        databaseDAO.changeNameOfRoom(roomID, roomName);
+    }
+    
     public ArrayList<Integer> getRoomIDsWithUserID(int userID) {
         return databaseDAO.getRoomIDsWithUserID(userID);
     }
@@ -39,7 +48,28 @@ public class RoomModel {
     
     public boolean inUserIdInRoomId(int userID, int RoomID) {
         if (RoomID == 0) return true;
-        
         return databaseDAO.inUserIdInRoomId(userID, RoomID);
+    }
+    
+    public ArrayList<Users> getUsersInRoom(int roomID) {
+        UserModel userModel = new UserModel();
+        ArrayList<Users> allUserInServer = userModel.getAllUsers();
+        ArrayList<Users> res = new ArrayList<>();
+        for (Users user : allUserInServer) {
+            if (inUserIdInRoomId(user.getUserID(), roomID))
+                res.add(user);
+        }
+        return res;
+    }
+    
+    public ArrayList<Users> getUsersNotInRoom(int roomID) {
+        UserModel userModel = new UserModel();
+        ArrayList<Users> allUserInServer = userModel.getAllUsers();
+        ArrayList<Users> res = new ArrayList<>();
+        for (Users user : allUserInServer) {
+            if (!inUserIdInRoomId(user.getUserID(), roomID))
+                res.add(user);
+        }
+        return res;
     }
 }

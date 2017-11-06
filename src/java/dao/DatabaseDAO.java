@@ -43,7 +43,7 @@ public class DatabaseDAO {
         try {
             String query = "INSERT INTO Rooms (room_name) VALUES (?); SELECT SCOPE_IDENTITY()";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, roomName);
+            statement.setString(1, roomName.trim());
             statement.executeUpdate();
             ResultSet generatedKeys = statement.getGeneratedKeys();
             while (generatedKeys.next()) {
@@ -67,8 +67,39 @@ public class DatabaseDAO {
         }
     }
     
+    public void changeNameOfRoom(int roomID, String roomName) {
+        try {
+            String query = "UPDATE rooms SET room_name = ? WHERE room_id = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(2, roomID);
+            statement.setString(1, roomName);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void deleteUserFromRoom(int userID, int roomID) {
-        //@ Todo: add code here
+        try {
+            String query = "DELETE FROM RoomMembers WHERE room_id = ? and userid = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, roomID);
+            statement.setInt(2, userID);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void deleteUsersFromRoom(int roomID) {
+        try {
+            String query = "DELETE FROM RoomMembers WHERE room_id = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, roomID);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void createNewMessage(int userId, int RoomId, String content, Date dateUploaded) {
@@ -77,17 +108,14 @@ public class DatabaseDAO {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, userId);
             statement.setInt(2, RoomId);
-            statement.setString(3, content);
+            statement.setString(3, content.trim());
             statement.setDate(4, new java.sql.Date(dateUploaded.getTime()));
             statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void createNewUser(String userName, Date dateOfBirth, String password, String sex) {
-        //@ Todo: add code here
-    }
+   
     
     public Users getUserInfo(int userID) {
         Users user = new Users();

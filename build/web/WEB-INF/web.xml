@@ -8,10 +8,17 @@
         <filter-name>UTF-8-Filter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    
     <servlet>
         <servlet-name>AccountController</servlet-name>
         <servlet-class>controller.AccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HandleConfigurationGroup</servlet-name>
+        <servlet-class>controller.HandleConfigurationGroup</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConfiigurationRoomController</servlet-name>
+        <servlet-class>controller.ConfiigurationRoomController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AccountController</servlet-name>
@@ -41,11 +48,10 @@
         <servlet-name>CreateRoomChat</servlet-name>
         <servlet-class>controller.CreateRoomChat</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>BannedWordController</servlet-name>
         <servlet-class>controller.BannedWordController</servlet-class>
     </servlet>
-    
     <servlet-mapping>
         <servlet-name>HandleSendMessageController</servlet-name>
         <url-pattern>/HandleSendMessageController</url-pattern>
@@ -54,7 +60,6 @@
         <servlet-name>HandleGetMessageController</servlet-name>
         <url-pattern>/HandleGetMessageController</url-pattern>
     </servlet-mapping>
-    
     <filter>
         <filter-name>AuthenFilter</filter-name>
         <filter-class>filter.AuthenFilter</filter-class>
@@ -63,7 +68,6 @@
         <filter-name>AuthenFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    
     <filter>
         <filter-name>AccessChatRoomFilter</filter-name>
         <filter-class>filter.AccessChatRoomFilter</filter-class>
@@ -72,12 +76,10 @@
         <filter-name>AccessChatRoomFilter</filter-name>
         <url-pattern>/chat.jsp</url-pattern>
     </filter-mapping>
-    
     <servlet-mapping>
         <servlet-name>HandleGetRoomController</servlet-name>
         <url-pattern>/HandleGetRoomController</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/Register</url-pattern>
@@ -93,9 +95,17 @@
         <servlet-name>CreateRoomChat</servlet-name>
         <url-pattern>/CreateRoomChat</url-pattern>
     </servlet-mapping>
-     <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>BannedWordController</servlet-name>
         <url-pattern>/BannedWord</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HandleConfigurationGroup</servlet-name>
+        <url-pattern>/HandleConfigurationGroup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfiigurationRoomController</servlet-name>
+        <url-pattern>/ConfiigurationRoomController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

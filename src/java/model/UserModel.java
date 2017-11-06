@@ -21,10 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 public class UserModel {
     DatabaseDAO databaseDAO = new DatabaseDAO();
     
-    public void createNewUser(String userName, Date dateOfBirth, String password, String sex) {
-        databaseDAO.createNewUser(userName, dateOfBirth, password, sex);
-    }
-    
     public Users getUserInfo(int userID) {
         return databaseDAO.getUserInfo(userID);
     }
