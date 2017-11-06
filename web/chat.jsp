@@ -125,6 +125,7 @@
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success floatleft">Apply</button>
                         </form>
+                            <button type="button" class="btn btn-warning floatleft" onclick="leaveRoom()">Leave Room</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                     </div>
                 </div>

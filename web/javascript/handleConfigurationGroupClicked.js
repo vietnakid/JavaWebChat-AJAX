@@ -13,6 +13,11 @@ function initHandleConfigurationGroupClicked() {
     document.getElementById("HandleConfigurationGroupForm").setAttribute("action", "ConfiigurationRoomController?roomID="+roomID);
 }
 
+function leaveRoom() {
+    var leaveRoomUrl = "LeaveRoomController?roomID=" + roomID;
+    window.location.replace(leaveRoomUrl);
+}
+
 function configurationRoomClicked() {
     var parameters = "roomID="+roomID;
     cofigurationGroupRequest = initXMLHttpRequest();

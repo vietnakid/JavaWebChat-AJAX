@@ -20,6 +20,10 @@
         <servlet-name>ConfiigurationRoomController</servlet-name>
         <servlet-class>controller.ConfiigurationRoomController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LeaveRoomController</servlet-name>
+        <servlet-class>controller.LeaveRoomController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AccountController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -106,6 +110,10 @@
     <servlet-mapping>
         <servlet-name>ConfiigurationRoomController</servlet-name>
         <url-pattern>/ConfiigurationRoomController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LeaveRoomController</servlet-name>
+        <url-pattern>/LeaveRoomController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
